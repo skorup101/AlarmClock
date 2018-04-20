@@ -1,32 +1,26 @@
 package clock;
 
-import javax.swing.*;
 import java.time.Instant;
 
 public class AlarmClock {
     private long startTime;
     private long endTime;
-    private int currentcountdown;
+    private long difference;
 
-    public AlarmClock(int seconds){
-        currentcountdown = seconds;
+    public AlarmClock(long seconds){
+        difference = seconds;
         startTime = Instant.now().getEpochSecond();
         endTime = startTime+seconds;
     }
 
-    private boolean isItTime(){
-        return endTime<=Instant.now().getEpochSecond();
+    public boolean isItTime(){
+        long now = Instant.now().getEpochSecond();
+        difference= endTime-now;
+        return endTime<now;
     }
 
-    public void startClock(JLabel jlabel) throws InterruptedException{
-        while(!isItTime()){
-            Thread.sleep(1000);
-            currentcountdown--;
-            jlabel.setText(getMessage());
-        }
-    }
     public String getMessage(){
-        if (currentcountdown>0) return Integer.toString(currentcountdown);
+        if (difference>0) return Long.toString(difference);
         else return "ALARM!";
     }
 }

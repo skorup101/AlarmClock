@@ -1,2 +1,1 @@
-# AlarmClock
-# This isn't working, looking for solution.
+# AlarmClock using Swing to perform a simple adjustable countdown
